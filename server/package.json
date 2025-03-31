@@ -1,6 +1,20 @@
 {
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "devStart": "nodemon script.js"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "express": "^5.1.0"
+    "@prisma/client": "^6.5.0",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.9"
   },
   "devDependencies": {
     "prisma": "^6.5.0"
