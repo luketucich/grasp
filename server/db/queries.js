@@ -1,15 +1,17 @@
-import { PrismaClient } from "@prisma/client";
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-async function main() {
-  const user = await prisma.user.create({ data: { name: "Luke" } });
-  console.log(user);
-}
-
-main()
-  .catch((e) => {
-    console.error(e.message);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
+const createUser = async (email, password) => {
+  return await prisma.user.create({
+    data: {
+      email,
+      password,
+      authProvider: "local",
+    },
   });
+};
+
+module.exports = {
+  prisma,
+  createUser,
+};
