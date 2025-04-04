@@ -31,12 +31,18 @@ function App() {
         {/* If user, only display log out option */}
         {user && (
           <>
-            <h3>Hi, {user.email.split("@")[0]}!</h3>
+            <h3>Hi, {user.username}!</h3>
             <button
               onClick={handleLogout}
               className="bg-red-300 text-white font-bold py-2 px-4 rounded w-full cursor-pointer"
             >
               Log-Out
+            </button>
+
+            <button className="bg-purple-300 text-white font-bold py-2 px-4 rounded w-full cursor-pointer">
+              <Link to={`/user/${user.username}`} className="block">
+                View your account
+              </Link>
             </button>
           </>
         )}

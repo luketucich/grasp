@@ -2,8 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const passport = require("passport");
-const prisma = require("./db/queries");
 const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/user");
 const cors = require("cors");
 
 const app = express();
@@ -36,6 +36,7 @@ app.use(passport.session());
 require("./config/passport");
 
 app.use("/", authRoutes);
+app.use("/user", userRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -8,7 +8,7 @@ const router = express.Router();
 // Registration route
 router.post("/register", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, username, password } = req.body;
 
     const existingUser = await prisma.user.findUnique({
       where: { email },
@@ -21,8 +21,12 @@ router.post("/register", async (req, res) => {
 
     // If not found, set up a new user
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await createUser(email, hashedPassword);
-    console.log("New user created:", { id: newUser.id, email: newUser.email });
+    const newUser = await createUser(email, username, hashedPassword);
+    console.log("New user created:", {
+      id: newUser.id,
+      email: newUser.email,
+      username: newUser.username,
+    });
 
     // Remove password from response for security
     const { password: _, ...userWithoutPassword } = newUser;

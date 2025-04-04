@@ -5,6 +5,7 @@ export async function registerAction({ request }) {
   try {
     const formData = await request.formData();
     const email = formData.get("email");
+    const username = formData.get("username");
     const password = formData.get("password");
 
     const response = await fetch("http://localhost:3000/register", {
@@ -12,7 +13,7 @@ export async function registerAction({ request }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, username, password }),
       credentials: "include",
     });
 
@@ -71,5 +72,28 @@ export async function logoutAction() {
     return redirect("/");
   } catch (error) {
     return { error: error.message };
+  }
+}
+
+export async function loadUserProfileAction({ params }) {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/user/${params.username}`,
+      {
+        method: "GET",
+        credentials: "include",
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to check profile ownership");
+    }
+
+    const data = await response.json();
+
+    return { isUser: data.isUser, isOwner: data.isOwner };
+  } catch (error) {
+    console.error("Error loading user profile:", error);
+    return { isUser: false, isOwner: false, error: error.message };
   }
 }
