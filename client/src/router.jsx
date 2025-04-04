@@ -1,8 +1,9 @@
 import { createBrowserRouter } from "react-router";
-import App from "./routes/App.jsx";
-import Register from "./components/Register.jsx";
-import LogIn from "./components/LogIn.jsx";
-import User from "./routes/User.jsx";
+import App from "./routes/App";
+import Register from "./components/Register";
+import Login from "./components/Login";
+import User from "./routes/User";
+import RootLayout from "./components/layouts/RootLayout";
 import {
   registerAction,
   loginAction,
@@ -13,27 +14,32 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
-    Component: App,
-  },
-  {
-    path: "/register",
-    Component: Register,
-    action: registerAction,
-  },
-  {
-    path: "/login",
-    Component: LogIn,
-    action: loginAction,
-  },
-  {
-    path: "/logout",
-    Component: null,
-    action: logoutAction,
-  },
-  {
-    path: "/user/:username",
-    Component: User,
-    loader: loadUserProfileAction,
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <App />,
+      },
+      {
+        path: "register",
+        element: <Register />,
+        action: registerAction,
+      },
+      {
+        path: "login",
+        element: <Login />,
+        action: loginAction,
+      },
+      {
+        path: "logout",
+        action: logoutAction,
+      },
+      {
+        path: "user/:username",
+        element: <User />,
+        loader: loadUserProfileAction,
+      },
+    ],
   },
 ]);
 
