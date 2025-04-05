@@ -1,6 +1,7 @@
 import { useParams, useLoaderData } from "react-router";
 import useAuthStore from "../stores/authStore";
 import { UserCircle, PlusCircle } from "lucide-react";
+import SetLibrary from "../components/SetLibrary";
 
 function User() {
   const currUser = useAuthStore((state) => state.user);
@@ -37,6 +38,7 @@ function User() {
                   <PlusCircle size={18} />
                   <span>Create New Flashcard Set</span>
                 </button>
+                <SetLibrary />
               </>
             ) : isUser ? (
               <>
@@ -53,7 +55,6 @@ function User() {
                     </h2>
                   </div>
                 </div>
-
                 <div className="bg-zinc-800/50 border border-zinc-700 rounded-lg p-6 text-center mt-6">
                   <p className="text-zinc-400">
                     {currProfileView} hasn't created any public flashcard sets

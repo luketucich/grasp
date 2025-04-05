@@ -78,20 +78,40 @@ router.post("/logout", (req, res, next) => {
 });
 
 // User info route
-router.get("/me", (req, res) => {
+router.get("/me", async (req, res) => {
   if (!req.user) {
     return res.status(401).json({ message: "Not authenticated" });
   }
 
-  // Remove password from response
-  const { password: _, ...userWithoutPassword } = req.user;
+  try {
+    const userId = req.user.id;
 
-  console.log("User info retrieved:", {
-    id: req.user.id,
-    email: req.user.email,
-  });
+    // Fetch full user data with sets from the database
+    const userWithSets = await prisma.user.findUnique({
+      where: { id: userId },
+      include: {
+        Set: true,
+      },
+    });
 
-  res.status(200).json(userWithoutPassword);
+    if (!userWithSets) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Remove password from response
+    const { password: _, ...userWithoutPassword } = userWithSets;
+
+    console.log("User info retrieved:", {
+      id: userWithSets.id,
+      email: userWithSets.email,
+      setCount: userWithSets.Set.length,
+    });
+
+    res.status(200).json(userWithoutPassword);
+  } catch (error) {
+    console.error("Error fetching user with sets:", error);
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 module.exports = router;

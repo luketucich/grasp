@@ -18,8 +18,23 @@ const isUser = async (username) => {
   });
 };
 
+const createSet = async (title, description, authorId) => {
+  return await prisma.set.create({
+    data: {
+      author: {
+        connect: {
+          id: authorId,
+        },
+      },
+      title,
+      description,
+    },
+  });
+};
+
 module.exports = {
   prisma,
   createUser,
   isUser,
+  createSet,
 };

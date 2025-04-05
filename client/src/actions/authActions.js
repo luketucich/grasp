@@ -51,7 +51,7 @@ export async function loginAction({ request }) {
     }
 
     useAuthStore.getState().setUser(data);
-    return redirect("/");
+    return redirect(`/user/${data.username}`);
   } catch (error) {
     return { error: error.message };
   }

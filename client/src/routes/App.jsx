@@ -1,4 +1,4 @@
-import { Code, Unlock, Zap } from "lucide-react";
+import { Code, Unlock, Zap, Github } from "lucide-react";
 
 function App() {
   return (
@@ -61,13 +61,13 @@ function App() {
               Get Started
             </a>
             <a
-              href="https://github.com/grasp-app/grasp"
+              href="https://github.com/luketucich/grasp"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 bg-zinc-800 hover:bg-zinc-700 text-white font-medium rounded-md transition-all focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2 focus:ring-offset-zinc-900 flex items-center gap-2"
             >
-              <Code size={18} />
-              <span>View Source</span>
+              <Github size={18} />
+              <span>GitHub</span>
             </a>
           </div>
         </div>
