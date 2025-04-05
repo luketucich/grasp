@@ -4,6 +4,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import User from "./routes/User";
 import RootLayout from "./components/layouts/RootLayout";
+import Error from "./routes/Error.jsx";
 import {
   registerAction,
   loginAction,
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
+    errorElement: <Error />,
     children: [
       {
         index: true,
