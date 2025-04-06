@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 const ActionButton = ({
   href,
@@ -33,20 +34,22 @@ const ActionButton = ({
 
   const externalProps = external
     ? {
-        target: "_blank",
-        rel: "noopener noreferrer",
+        onClick: (e) => {
+          e.preventDefault();
+          window.open(href, "_blank");
+        },
+        href: "#",
       }
-    : {};
+    : { to: href };
 
   return (
     <div className="relative">
-      <a
-        href={href}
+      <Link
         className={`px-8 py-3 font-medium rounded-lg inline-block ${colorStyle.background} ${colorStyle.text} border ${colorStyle.border} ${colorStyle.shadow} ${rotationClass}`}
         {...externalProps}
       >
         {children}
-      </a>
+      </Link>
     </div>
   );
 };

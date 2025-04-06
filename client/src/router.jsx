@@ -1,12 +1,12 @@
 import { createBrowserRouter } from "react-router";
-import App from "./routes/App";
-import Register from "./components/Register";
-import Login from "./components/Login";
+import Hero from "./routes/Hero.jsx";
+import Signup from "./components/Signup.jsx";
+import Login from "./components/Login.jsx";
 import User from "./routes/User";
 import RootLayout from "./components/layouts/RootLayout";
 import Error from "./routes/Error.jsx";
 import {
-  registerAction,
+  signupAction,
   loginAction,
   logoutAction,
   loadUserProfileAction,
@@ -20,12 +20,12 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <App />,
+        element: <Hero />,
       },
       {
-        path: "register",
-        element: <Register />,
-        action: registerAction,
+        path: "signup",
+        element: <Signup />,
+        action: signupAction,
       },
       {
         path: "login",

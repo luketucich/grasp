@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form } from "react-router";
+import { Form, Link } from "react-router";
 import { Mail, Lock, LogIn } from "lucide-react";
 
 function Login() {
@@ -84,12 +84,12 @@ function Login() {
 
         <div className="mt-6 text-center text-sm text-zinc-500">
           Don't have an account?{" "}
-          <a
-            href="/register"
+          <Link
+            to="/signup"
             className="text-blue-500 hover:text-blue-600 transition-colors"
           >
             Sign up now
-          </a>
+          </Link>
         </div>
       </div>
     </div>

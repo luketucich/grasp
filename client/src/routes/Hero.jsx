@@ -4,7 +4,7 @@ import GraphPaperBackground from "../components/GraphPaperBackground";
 import FeatureCard from "../components/FeatureCard";
 import ActionButton from "../components/ActionButton"; // Import the new component
 
-function App() {
+function Hero() {
   return (
     <div className="min-h-screen p-4">
       <div className="relative z-10 max-w-5xl mx-auto">
@@ -60,7 +60,7 @@ function App() {
 
           {/* Action buttons */}
           <div className="mt-16 flex flex-wrap gap-6 justify-center">
-            <ActionButton href="/register" color="blue" rotation={-1}>
+            <ActionButton href="/signup" color="blue" rotation={-1}>
               Get Started
             </ActionButton>
 
@@ -79,4 +79,4 @@ function App() {
   );
 }
 
-export default App;
+export default Hero;

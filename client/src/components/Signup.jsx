@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Form } from "react-router";
 import { Mail, User, Lock, UserPlus } from "lucide-react";
 
-function Register() {
+function Signup() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -11,7 +11,7 @@ function Register() {
     <div className="flex justify-center items-center min-h-[85vh] px-4">
       <div className="w-full max-w-md p-6 md:p-8 bg-white border-[0.075rem] border-gray-350 rounded-lg shadow-md">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-zinc-900">Register</h1>
+          <h1 className="text-2xl font-bold text-zinc-900">Sign Up</h1>
           <p className="text-zinc-500 mt-1">Create your account</p>
         </div>
 
@@ -116,4 +116,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Signup;

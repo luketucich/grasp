@@ -1,7 +1,7 @@
 import { redirect } from "react-router";
 import useAuthStore from "../stores/authStore";
 
-export async function registerAction({ request }) {
+export async function signupAction({ request }) {
   try {
     const formData = await request.formData();
     const email = formData.get("email");

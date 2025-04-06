@@ -11,11 +11,15 @@ import useAuthStore from "../stores/authStore";
 
 function Sidebar() {
   const [isSetsExpanded, setIsSetsExpanded] = useState(true);
-  const [isCollapsed, setIsCollapsed] = useState(false);
   const currUser = useAuthStore((state) => state.user);
   const currUserSets = currUser?.Set;
 
-  // Toggle sidebar collapse on smaller screens
+  // Initialize state based on window size
+  const [isCollapsed, setIsCollapsed] = useState(() => {
+    return window.innerWidth < 1024;
+  });
+
+  // Handle window resize events to update sidebar state
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 1024) {
@@ -25,14 +29,10 @@ function Sidebar() {
       }
     };
 
-    // Set initial state
-    handleResize();
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Update CSS variable when sidebar state changes
   useEffect(() => {
     document.documentElement.style.setProperty(
       "--sidebar-width",
@@ -46,7 +46,6 @@ function Sidebar() {
         isCollapsed ? "w-16 translate-x-0" : "w-60 translate-x-0 opacity-100"
       } bg-white overflow-hidden whitespace-nowrap border-r border-gray-350`}
     >
-      {/* The rest of your Sidebar component remains unchanged */}
       <div className="h-full px-3 py-4 flex flex-col">
         {/* Toggle button */}
         <button
@@ -89,7 +88,7 @@ function Sidebar() {
 
         {/* Sidebar navigation */}
         <nav className="space-y-1.5 flex-1 overflow-y-auto">
-          {/* Your Sets expandable section */}
+          {/* 'Your Sets' expandable section */}
           <div className="pt-1">
             <button
               onClick={() => !isCollapsed && setIsSetsExpanded(!isSetsExpanded)}
@@ -142,7 +141,7 @@ function Sidebar() {
               </div>
             )}
 
-            {/* "Create new set" button for collapsed state */}
+            {/* 'Create new set' button for collapsed state */}
             {isCollapsed && (
               <Link
                 to="/sets/create"

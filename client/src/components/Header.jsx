@@ -67,13 +67,13 @@ function Header() {
                   to="/login"
                   className="relative px-4 py-2 rounded-lg text-zinc-700 hover:text-blue-500 hover:bg-blue-50 transition-all"
                 >
-                  Login
+                  Log In
                 </Link>
                 <Link
-                  to="/register"
+                  to="/signup"
                   className="ml-1 px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-medium transition-all shadow-md hover:shadow-blue-200"
                 >
-                  Register
+                  Sign Up
                 </Link>
               </>
             ) : (
@@ -113,7 +113,7 @@ function Header() {
                           className="flex w-full items-center gap-2 px-4 py-2 text-sm text-zinc-600 hover:text-blue-500 hover:bg-blue-50 transition-all"
                         >
                           <LogOut size={16} />
-                          <span>Logout</span>
+                          <span>Log Out</span>
                         </button>
                       </Form>
                     </div>
@@ -155,14 +155,14 @@ function Header() {
                   className="flex items-center px-4 py-3 rounded-lg text-zinc-700 hover:text-blue-500 hover:bg-blue-50 transition-all"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Login
+                  Log In
                 </Link>
                 <Link
-                  to="/register"
+                  to="/signup"
                   className="flex items-center px-4 py-3 rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-sm mx-1 my-1 transition-all"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Register
+                  Sign Up
                 </Link>
               </>
             ) : (
@@ -189,7 +189,7 @@ function Header() {
                     onClick={() => setIsMenuOpen(false)}
                   >
                     <LogOut size={18} />
-                    <span>Logout</span>
+                    <span>Log Out</span>
                   </button>
                 </Form>
               </>
