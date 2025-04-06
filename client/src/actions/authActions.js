@@ -51,6 +51,9 @@ export async function loginAction({ request }) {
     }
 
     useAuthStore.getState().setUser(data);
+
+    // Ensure auth state is updated before redirecting
+    await useAuthStore.getState().checkForUser();
     return redirect(`/user/${data.username}`);
   } catch (error) {
     return { error: error.message };

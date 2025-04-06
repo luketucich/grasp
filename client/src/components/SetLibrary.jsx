@@ -11,18 +11,18 @@ function SetLibrary() {
           {currUserSets.map((set) => (
             <div
               key={set.id}
-              className="bg-zinc-800/50 border border-zinc-700 rounded-lg p-6"
+              className="bg-gray-50 border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow"
             >
-              <h2 className="text-lg font-bold text-white">{set.title}</h2>
-              <p className="text-zinc-400">
+              <h2 className="text-lg font-bold text-zinc-900">{set.title}</h2>
+              <p className="text-zinc-500">
                 {set.description ? set.description : ""}
               </p>
             </div>
           ))}
         </div>
       ) : (
-        <div className="bg-zinc-800/50 border border-zinc-700 rounded-lg p-6 text-center">
-          <p className="text-zinc-400">
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 text-center mt-6">
+          <p className="text-zinc-500">
             Hmm... It looks like you don't have any flashcard sets yet.
           </p>
         </div>

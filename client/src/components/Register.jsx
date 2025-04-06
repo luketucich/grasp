@@ -9,22 +9,22 @@ function Register() {
 
   return (
     <div className="flex justify-center items-center min-h-[85vh] px-4">
-      <div className="w-full max-w-md p-6 md:p-8 bg-zinc-900/80 backdrop-blur-sm border border-zinc-800 rounded-lg shadow-xl">
+      <div className="w-full max-w-md p-6 md:p-8 bg-white border-[0.075rem] border-gray-350 rounded-lg shadow-md">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-white">Register</h1>
-          <p className="text-zinc-400 mt-1">Create your account</p>
+          <h1 className="text-2xl font-bold text-zinc-900">Register</h1>
+          <p className="text-zinc-500 mt-1">Create your account</p>
         </div>
 
         <Form action="/register" method="post" className="space-y-5">
           <div className="space-y-1">
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-zinc-300"
+              className="block text-sm font-medium text-zinc-700"
             >
               Email
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-zinc-500">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-zinc-400">
                 <Mail size={18} />
               </div>
               <input
@@ -35,7 +35,7 @@ function Register() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="name@example.com"
-                className="block w-full pl-10 px-4 py-2.5 bg-zinc-800 border border-zinc-700 rounded-md text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                className="block w-full pl-10 px-4 py-2.5 bg-white border border-gray-300 rounded-md text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
               />
             </div>
           </div>
@@ -43,12 +43,12 @@ function Register() {
           <div className="space-y-1">
             <label
               htmlFor="username"
-              className="block text-sm font-medium text-zinc-300"
+              className="block text-sm font-medium text-zinc-700"
             >
               Username
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-zinc-500">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-zinc-400">
                 <User size={18} />
               </div>
               <input
@@ -59,7 +59,7 @@ function Register() {
                 onChange={(e) => setUsername(e.target.value)}
                 required
                 placeholder="johndoe"
-                className="block w-full pl-10 px-4 py-2.5 bg-zinc-800 border border-zinc-700 rounded-md text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                className="block w-full pl-10 px-4 py-2.5 bg-white border border-gray-300 rounded-md text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
               />
             </div>
           </div>
@@ -67,12 +67,12 @@ function Register() {
           <div className="space-y-1">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-zinc-300"
+              className="block text-sm font-medium text-zinc-700"
             >
               Password
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-zinc-500">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-zinc-400">
                 <Lock size={18} />
               </div>
               <input
@@ -83,7 +83,7 @@ function Register() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 placeholder="••••••••"
-                className="block w-full pl-10 px-4 py-2.5 bg-zinc-800 border border-zinc-700 rounded-md text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                className="block w-full pl-10 px-4 py-2.5 bg-white border border-gray-300 rounded-md text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
               />
             </div>
             <p className="mt-1 text-xs text-zinc-500">
@@ -94,7 +94,7 @@ function Register() {
           <div className="pt-2">
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-md transition-all shadow-md hover:shadow-blue-500/25 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-zinc-900"
+              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-all shadow-md hover:shadow-blue-200/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
             >
               <UserPlus size={18} />
               <span>Create Account</span>
@@ -102,11 +102,11 @@ function Register() {
           </div>
         </Form>
 
-        <div className="mt-6 text-center text-sm text-zinc-400">
+        <div className="mt-6 text-center text-sm text-zinc-500">
           Already have an account?{" "}
           <a
             href="/login"
-            className="text-blue-400 hover:text-blue-300 transition-colors"
+            className="text-blue-500 hover:text-blue-600 transition-colors"
           >
             Log in
           </a>

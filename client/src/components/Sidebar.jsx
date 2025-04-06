@@ -32,19 +32,28 @@ function Sidebar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Update CSS variable when sidebar state changes
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      "--sidebar-width",
+      isCollapsed ? "4rem" : "15rem"
+    );
+  }, [isCollapsed]);
+
   return (
     <aside
-      className={`fixed left-0 top-0 z-40 h-screen pt-20 transition-all duration-300 ${
-        isCollapsed ? "w-16 translate-x-0" : "w-56 translate-x-0 opacity-100"
-      } bg-black border-r border-zinc-800 overflow-hidden whitespace-nowrap`}
+      className={`fixed left-0 top-0 z-40 h-screen pt-20 transition-all duration-300 shadow-md-right ${
+        isCollapsed ? "w-16 translate-x-0" : "w-60 translate-x-0 opacity-100"
+      } bg-white overflow-hidden whitespace-nowrap border-r border-gray-350`}
     >
+      {/* The rest of your Sidebar component remains unchanged */}
       <div className="h-full px-3 py-4 flex flex-col">
         {/* Toggle button */}
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
           className={`${
             isCollapsed ? "mx-auto" : "ml-auto"
-          } p-1 text-zinc-400 hover:text-white mb-2 cursor-pointer`}
+          } p-1 text-gray-500 hover:text-blue-500 mb-2 cursor-pointer transition-colors duration-200`}
           aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
           <PanelLeft
@@ -57,9 +66,24 @@ function Sidebar() {
 
         {/* Sidebar header - only show when expanded */}
         {!isCollapsed && (
-          <div className="px-2 mb-4">
-            <h2 className="text-lg font-semibold text-white mb-1">Library</h2>
-            <p className="text-xs text-zinc-400">Your learning materials</p>
+          <div className="px-2 mb-6">
+            <h2 className="text-xl font-bold text-zinc-900 mb-1 transform -rotate-1">
+              <span className="relative inline-block">
+                Library
+                <div
+                  className="absolute -bottom-1 left-0 right-0 h-2 bg-yellow-300 -z-0 rounded-sm transform -rotate-1"
+                  style={{
+                    clipPath: "polygon(0% 0%, 100% 0%, 96% 100%, 4% 100%)",
+                    opacity: 0.6,
+                    background:
+                      "linear-gradient(90deg, #FBBF24 0%, #FCD34D 50%, #FBBF24 100%)",
+                  }}
+                ></div>
+              </span>
+            </h2>
+            <p className="text-xs text-zinc-500 font-light">
+              Your learning materials
+            </p>
           </div>
         )}
 
@@ -71,12 +95,12 @@ function Sidebar() {
               onClick={() => !isCollapsed && setIsSetsExpanded(!isSetsExpanded)}
               className={`w-full flex items-center ${
                 isCollapsed ? "justify-center" : "justify-between"
-              } px-3 py-2 text-zinc-300 hover:text-white hover:bg-zinc-800/60 rounded-md transition-colors overflow-hidden cursor-pointer`}
+              } px-3 py-2 text-zinc-700 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors overflow-hidden cursor-pointer`}
               aria-expanded={isSetsExpanded}
             >
               <div className="flex items-center gap-3 min-w-max">
                 <FolderOpen size={18} className="flex-shrink-0" />
-                {!isCollapsed && <span>Your Sets</span>}
+                {!isCollapsed && <span className="font-medium">Your Sets</span>}
               </div>
               {!isCollapsed && (
                 <ChevronDown
@@ -101,7 +125,7 @@ function Sidebar() {
                       <Link
                         key={set.id}
                         to={`/sets/${set.id}`}
-                        className="flex items-center gap-2 px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800/40 rounded-md transition-colors truncate cursor-pointer"
+                        className="flex items-center gap-2 px-3 py-1.5 text-sm text-zinc-600 hover:text-blue-500 hover:bg-blue-50 rounded-md transition-colors truncate cursor-pointer"
                       >
                         {set.title}
                       </Link>
@@ -109,7 +133,7 @@ function Sidebar() {
 
                   <Link
                     to="/sets/create"
-                    className="flex items-center gap-2 px-3 py-1.5 text-sm text-blue-400 hover:text-blue-300 hover:bg-blue-900/20 rounded-md transition-colors mt-2 cursor-pointer"
+                    className="flex items-center gap-2 px-3 py-2 mt-2 text-sm font-medium text-blue-500 hover:text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors cursor-pointer shadow-sm"
                   >
                     <Plus size={16} className="flex-shrink-0" />
                     <span>Create new set</span>
@@ -122,7 +146,7 @@ function Sidebar() {
             {isCollapsed && (
               <Link
                 to="/sets/create"
-                className="flex justify-center items-center mt-3 p-2 text-blue-400 hover:text-blue-300 hover:bg-blue-900/20 rounded-md transition-colors cursor-pointer"
+                className="flex justify-center items-center mt-3 p-2 text-blue-500 hover:text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors cursor-pointer shadow-sm"
                 title="Create new set"
               >
                 <Plus size={18} className="flex-shrink-0" />
@@ -133,7 +157,7 @@ function Sidebar() {
 
         {/* Bottom section */}
         <div
-          className={`pt-4 mt-4 border-t border-zinc-800 ${
+          className={`pt-4 mt-4 border-t border-gray-200 ${
             isCollapsed ? "flex justify-center" : ""
           }`}
         >
@@ -141,10 +165,12 @@ function Sidebar() {
             to="/settings"
             className={`flex items-center ${
               isCollapsed ? "justify-center p-2" : "gap-3 px-3 py-2"
-            } text-zinc-400 hover:text-white hover:bg-zinc-800/60 rounded-md transition-colors overflow-hidden cursor-pointer`}
+            } text-zinc-600 hover:text-blue-500 hover:bg-blue-50 rounded-md transition-colors overflow-hidden cursor-pointer`}
           >
             <Settings size={18} className="flex-shrink-0" />
-            {!isCollapsed && <span className="min-w-max">Settings</span>}
+            {!isCollapsed && (
+              <span className="min-w-max font-medium">Settings</span>
+            )}
           </Link>
         </div>
       </div>

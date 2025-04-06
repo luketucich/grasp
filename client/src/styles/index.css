@@ -1,1 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --font-inter: "Inter", "sans-serif";
+  --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
+  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+  --shadow-md-right: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --sidebar-width: 15rem;
+}
+
+/* Add this new class for the content wrapper */
+.content-wrapper {
+  margin-left: 0;
+  transition: margin 0.3s var(--ease-snappy);
+}
+
+/* Apply margin on medium screens and up */
+@media (min-width: 768px) {
+  .content-wrapper {
+    margin-left: var(--sidebar-width);
+  }
+}
+
+/* Additional styles for clean spacing */
+.content-wrapper {
+  padding: 1.5rem;
+}

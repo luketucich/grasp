@@ -33,21 +33,18 @@ function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-black/80 backdrop-blur-md border-b border-zinc-800/40 shadow-lg"
-          : "bg-black border-b border-zinc-800"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b-[0.075rem] border-gray-350 shadow-md
+        ${isScrolled ? "bg-white/75 backdrop-blur-md" : "bg-white"}`}
     >
       <div className="container mx-auto px-4 py-3 md:py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center gap-2 font-semibold text-2xl text-white group"
+            className="flex items-center gap-2 font-bold text-2xl text-zinc-900 group"
             aria-label="Grasp homepage"
           >
-            <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent transition-all duration-300 group-hover:from-blue-400 group-hover:to-indigo-400 group-hover:scale-105 transform">
+            <span className="relative z-10 text-blue-500 transition-all duration-300 group-hover:text-blue-600">
               Grasp
             </span>
           </Link>
@@ -57,7 +54,7 @@ function Header() {
             {currUser && (
               <Link
                 to={`/user/${currUser.username}`}
-                className="relative flex items-center gap-1.5 px-4 py-2 rounded-md text-zinc-300 hover:text-white hover:bg-zinc-800/60 transition-all"
+                className="relative flex items-center gap-1.5 px-4 py-2 rounded-lg text-zinc-700 hover:text-blue-500 hover:bg-blue-50 transition-all"
               >
                 <BookOpen size={18} />
                 <span>Your Library</span>
@@ -68,13 +65,13 @@ function Header() {
               <>
                 <Link
                   to="/login"
-                  className="relative px-4 py-2 rounded-md text-zinc-300 hover:text-white hover:bg-zinc-800/60 transition-all"
+                  className="relative px-4 py-2 rounded-lg text-zinc-700 hover:text-blue-500 hover:bg-blue-50 transition-all"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="ml-1 px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-md hover:shadow-blue-500/25"
+                  className="ml-1 px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-medium transition-all shadow-md hover:shadow-blue-200"
                 >
                   Register
                 </Link>
@@ -86,7 +83,7 @@ function Header() {
                   onClick={() =>
                     setIsProfileDropdownOpen(!isProfileDropdownOpen)
                   }
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-md text-zinc-300 hover:text-white hover:bg-zinc-800/60 transition-all"
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-zinc-700 hover:text-blue-500 hover:bg-blue-50 transition-all"
                   aria-expanded={isProfileDropdownOpen}
                   aria-haspopup="true"
                 >
@@ -101,10 +98,11 @@ function Header() {
                 </button>
 
                 {isProfileDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-zinc-900 border border-zinc-800 shadow-lg shadow-black/50 ring-1 ring-black ring-opacity-5 focus:outline-none py-1">
-                    <div className="px-3 py-2 border-b border-zinc-800">
-                      <p className="text-sm text-zinc-400">Signed in as</p>
-                      <p className="font-medium truncate text-zinc-200">
+                  <div className="absolute right-0 mt-2 w-48 origin-top-right rounded-lg bg-white border-[0.075rem] border-gray-350 shadow-lg focus:outline-none py-1">
+                    {" "}
+                    <div className="px-3 py-2 border-b border-gray-200">
+                      <p className="text-sm text-gray-500">Signed in as</p>
+                      <p className="font-medium truncate text-zinc-800">
                         {currUser.username}
                       </p>
                     </div>
@@ -112,7 +110,7 @@ function Header() {
                       <Form method="post" action="/logout">
                         <button
                           type="submit"
-                          className="flex w-full items-center gap-2 px-4 py-2 text-sm text-zinc-300 hover:text-white hover:bg-zinc-800 transition-all"
+                          className="flex w-full items-center gap-2 px-4 py-2 text-sm text-zinc-600 hover:text-blue-500 hover:bg-blue-50 transition-all"
                         >
                           <LogOut size={16} />
                           <span>Logout</span>
@@ -128,7 +126,7 @@ function Header() {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-zinc-400 hover:text-white hover:bg-zinc-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 transition-colors"
+            className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-zinc-500 hover:text-blue-500 hover:bg-blue-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-opacity-75 transition-colors"
             aria-controls="mobile-menu"
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -154,14 +152,14 @@ function Header() {
               <>
                 <Link
                   to="/login"
-                  className="flex items-center px-4 py-3 rounded-md text-zinc-300 hover:text-white hover:bg-zinc-800 transition-all"
+                  className="flex items-center px-4 py-3 rounded-lg text-zinc-700 hover:text-blue-500 hover:bg-blue-50 transition-all"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="flex items-center px-4 py-3 rounded-md bg-blue-600 hover:bg-blue-500 text-white shadow-sm mx-1 transition-all"
+                  className="flex items-center px-4 py-3 rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-sm mx-1 my-1 transition-all"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Register
@@ -169,15 +167,15 @@ function Header() {
               </>
             ) : (
               <>
-                <div className="px-4 py-2 border-b border-zinc-800">
-                  <p className="text-sm text-zinc-400">Signed in as</p>
-                  <p className="font-medium truncate text-zinc-200">
+                <div className="px-4 py-2 border-b border-gray-200">
+                  <p className="text-sm text-gray-500">Signed in as</p>
+                  <p className="font-medium truncate text-zinc-800">
                     {currUser.username}
                   </p>
                 </div>
                 <Link
                   to={`/user/${currUser.username}`}
-                  className="flex items-center gap-2 px-4 py-3 rounded-md text-zinc-300 hover:text-white hover:bg-zinc-800 transition-all"
+                  className="flex items-center gap-2 px-4 py-3 rounded-lg text-zinc-700 hover:text-blue-500 hover:bg-blue-50 transition-all"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <BookOpen size={18} />
@@ -187,7 +185,7 @@ function Header() {
                 <Form method="post" action="/logout">
                   <button
                     type="submit"
-                    className="flex w-full items-center gap-2 px-4 py-3 rounded-md text-zinc-300 hover:text-white hover:bg-zinc-800 transition-all"
+                    className="flex w-full items-center gap-2 px-4 py-3 rounded-lg text-zinc-700 hover:text-blue-500 hover:bg-blue-50 transition-all"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     <LogOut size={18} />
