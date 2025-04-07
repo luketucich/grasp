@@ -10,7 +10,9 @@ import {
   signupAction,
   loginAction,
   logoutAction,
+  createSetAction,
 } from "./actions/authActions.js";
+import SetCreator from "./components/SetCreator.jsx";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +37,11 @@ const router = createBrowserRouter([
       {
         path: "logout",
         action: logoutAction,
+      },
+      {
+        path: "create/set",
+        element: <SetCreator />,
+        action: createSetAction,
       },
       ...userRoutes,
     ],

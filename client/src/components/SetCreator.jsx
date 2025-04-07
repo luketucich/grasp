@@ -1,12 +1,10 @@
 import { Form } from "react-router";
-import { BookType, BookText, Plus, Save } from "lucide-react";
-import FlashcardCreator from "./FlashcardCreator";
-// import { useState } from "react";
+import { BookType, BookText, Save } from "lucide-react";
+import { useState } from "react";
 
 function SetCreator() {
-  // const [title, setTitle] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [flashcards, setFlashcards] = useState([{}]);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
   return (
     <div className="flex justify-center items-center min-h-[85vh] px-4 py-8">
@@ -20,7 +18,7 @@ function SetCreator() {
           </p>
         </div>
 
-        <Form action="/create-flashcards" method="post" className="space-y-6">
+        <Form action="/create/set" method="post" className="space-y-6">
           <div className="space-y-1">
             <label
               htmlFor="title"
@@ -37,13 +35,15 @@ function SetCreator() {
                 type="text"
                 id="title"
                 placeholder="e.g. Spanish Vocabulary"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 className="block w-full pl-10 px-4 py-2.5 bg-white border border-gray-300 rounded-md text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
               />
             </div>
           </div>
           <div className="space-y-1">
             <label
-              htmlFor="title"
+              htmlFor="description"
               className="block text-sm font-medium text-zinc-700"
             >
               Description
@@ -53,37 +53,21 @@ function SetCreator() {
                 <BookText size={18} />
               </div>
               <input
-                name="title"
+                name="description"
                 type="text"
-                id="title"
+                id="description"
                 placeholder="e.g. Vocabulary for Spanish 101"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 className="block w-full pl-10 px-4 py-2.5 bg-white border border-gray-300 rounded-md text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
               />
             </div>
           </div>
 
-          <div className="space-y-4">
-            <div className="flex justify-between items-center">
-              <h2 className="text-lg font-medium text-zinc-800">Flashcards</h2>
-              <span className="text-sm text-zinc-500">1 card</span>
-            </div>
-
-            {/* Example FlashcardCreator component */}
-            <FlashcardCreator index={1} />
-
-            <button
-              type="button"
-              className="w-full flex items-center justify-center gap-2 py-2 px-4 border border-gray-300 bg-white hover:bg-gray-50 text-zinc-700 font-medium rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
-            >
-              <Plus size={18} />
-              <span>Add Card</span>
-            </button>
-          </div>
-
           <div className="pt-2">
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-all shadow-md hover:shadow-blue-200/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
+              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-all shadow-md hover:shadow-blue-200/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white cursor-pointer"
             >
               <Save size={18} />
               <span>Save Flashcard Set</span>

@@ -66,19 +66,8 @@ function Sidebar() {
         {/* Sidebar header - only show when expanded */}
         {!isCollapsed && (
           <div className="px-2 mb-6">
-            <h2 className="text-xl font-bold text-zinc-900 mb-1 transform -rotate-1">
-              <span className="relative inline-block">
-                Library
-                <div
-                  className="absolute -bottom-1 left-0 right-0 h-2 bg-yellow-300 -z-0 rounded-sm transform -rotate-1"
-                  style={{
-                    clipPath: "polygon(0% 0%, 100% 0%, 96% 100%, 4% 100%)",
-                    opacity: 0.6,
-                    background:
-                      "linear-gradient(90deg, #FBBF24 0%, #FCD34D 50%, #FBBF24 100%)",
-                  }}
-                ></div>
-              </span>
+            <h2 className="text-xl font-bold text-zinc-900 mb-1">
+              <span className="relative inline-block">Library</span>
             </h2>
             <p className="text-xs text-zinc-500 font-light">
               Your learning materials
@@ -90,31 +79,38 @@ function Sidebar() {
         <nav className="space-y-1.5 flex-1 overflow-y-auto">
           {/* 'Your Sets' expandable section */}
           <div className="pt-1">
-            <button
-              onClick={() => !isCollapsed && setIsSetsExpanded(!isSetsExpanded)}
-              className={`w-full flex items-center ${
-                isCollapsed ? "justify-center" : "justify-between"
-              } px-3 py-2 text-zinc-700 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors overflow-hidden cursor-pointer`}
-              aria-expanded={isSetsExpanded}
-            >
-              <div className="flex items-center gap-3 min-w-max">
-                <FolderOpen size={18} className="flex-shrink-0" />
-                {!isCollapsed && <span className="font-medium">Your Sets</span>}
-              </div>
-              {!isCollapsed && (
+            {!isCollapsed ? (
+              <button
+                onClick={() => setIsSetsExpanded(!isSetsExpanded)}
+                className={`w-full flex items-center ${
+                  isCollapsed ? "justify-center" : "justify-between"
+                } px-3 py-2 text-zinc-700 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors overflow-hidden cursor-pointer`}
+                aria-expanded={isSetsExpanded}
+              >
+                <div className="flex items-center gap-3 min-w-max">
+                  <FolderOpen size={18} className="flex-shrink-0" />
+                  <span className="font-medium">Your Sets</span>
+                </div>
                 <ChevronDown
                   size={16}
                   className={`transition-transform duration-200 ${
                     isSetsExpanded ? "rotate-180" : ""
                   }`}
                 />
-              )}
-            </button>
+              </button>
+            ) : (
+              <Link
+                to={`/user/${currUser.username}`}
+                className="flex items-center justify-center gap-2 px-3 py-2 text-zinc-700 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors cursor-pointer"
+              >
+                <FolderOpen size={18} className="flex-shrink-0" />
+              </Link>
+            )}
 
             {/* Sets list - only show when expanded */}
             {!isCollapsed && (
               <div
-                className={`overflow-hidden transition-all duration-300 ${
+                className={`overflow-y-scroll transition-all duration-300 ${
                   isSetsExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
                 }`}
               >
@@ -131,7 +127,7 @@ function Sidebar() {
                     ))}
 
                   <Link
-                    to="/sets/create"
+                    to="/create/set"
                     className="flex items-center gap-2 px-3 py-2 mt-2 text-sm font-medium text-blue-500 hover:text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors cursor-pointer shadow-sm"
                   >
                     <Plus size={16} className="flex-shrink-0" />
@@ -144,7 +140,7 @@ function Sidebar() {
             {/* 'Create new set' button for collapsed state */}
             {isCollapsed && (
               <Link
-                to="/sets/create"
+                to="/create/set"
                 className="flex justify-center items-center mt-3 p-2 text-blue-500 hover:text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors cursor-pointer shadow-sm"
                 title="Create new set"
               >

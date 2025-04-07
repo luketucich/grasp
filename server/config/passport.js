@@ -19,7 +19,13 @@ passport.use(
 
         // If user not found, return error
         if (!user) {
-          return done(null, false, { message: "Incorrect email." });
+          if (process.env.NODE_ENV === "production") {
+            return done(null, false, {
+              message: "No account found with this email address.",
+            });
+          } else {
+            return done(null, false, { message: "Invalid credentials." });
+          }
         }
 
         // If user found, check password
@@ -27,7 +33,13 @@ passport.use(
 
         // If password doesn't match, return error
         if (!isMatch) {
-          return done(null, false, { message: "Incorrect password." });
+          if (process.env.NODE_ENV === "production") {
+            return done(null, false, {
+              message: "Password is incorrect. Please try again.",
+            });
+          } else {
+            return done(null, false, { message: "Invalid credentials." });
+          }
         }
 
         // If all checks pass, return user

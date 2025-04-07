@@ -96,7 +96,37 @@ export async function loadUserProfileAction({ params }) {
 
     return { isUser: data.isUser, isOwner: data.isOwner };
   } catch (error) {
-    console.error("Error loading user profile:", error);
     return { isUser: false, isOwner: false, error: error.message };
+  }
+}
+
+export async function createSetAction({ request }) {
+  try {
+    const formData = await request.formData();
+    const title = formData.get("title");
+    const description = formData.get("description");
+
+    const response = await fetch(`http://localhost:3000/create/set`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ title, description }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Set creation failed");
+    }
+
+    // Ensure auth state is updated before redirecting
+    await useAuthStore.getState().checkForUser();
+
+    // Redirect to the user's profile page
+    const data = await response.json();
+    return redirect(`/user/${data.authorUsername}`);
+  } catch (error) {
+    console.error("Error creating set:", error);
+    return { error: "Failed to create set. Please try again." };
   }
 }

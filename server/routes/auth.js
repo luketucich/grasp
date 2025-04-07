@@ -16,7 +16,12 @@ router.post("/register", async (req, res) => {
 
     if (existingUser) {
       console.log("User already exists:", { email });
-      return res.status(400).json({ message: "User already exists" });
+      return res.status(400).json({
+        message:
+          process.env.NODE_ENV === "production"
+            ? "A user with this email already exists"
+            : "Authentication error",
+      });
     }
 
     // If not found, set up a new user
@@ -37,7 +42,10 @@ router.post("/register", async (req, res) => {
 
     return res.status(500).json({
       message: "Error creating user",
-      error: error.message,
+      error:
+        process.env.NODE_ENV === "development"
+          ? error.message
+          : "An internal server error occurred",
     });
   }
 });
@@ -49,7 +57,12 @@ router.post("/login", (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res.status(401).json({
+        message:
+          process.env.NODE_ENV === "development"
+            ? "Invalid email or password"
+            : "Authentication failed",
+      });
     }
 
     req.login(user, (err) => {
@@ -95,7 +108,12 @@ router.get("/me", async (req, res) => {
     });
 
     if (!userWithSets) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({
+        message:
+          process.env.NODE_ENV === "development"
+            ? "User profile not found"
+            : "Resource not found",
+      });
     }
 
     // Remove password from response
@@ -110,7 +128,12 @@ router.get("/me", async (req, res) => {
     res.status(200).json(userWithoutPassword);
   } catch (error) {
     console.error("Error fetching user with sets:", error);
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({
+      message:
+        process.env.NODE_ENV === "development"
+          ? `Error fetching user data: ${error.message}`
+          : "An internal server error occurred",
+    });
   }
 });
 

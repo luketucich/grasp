@@ -1,15 +1,16 @@
 function authorizeUserAction(req, res, next) {
+  // Check if user is authenticated
   if (!req.user) {
-    return res.status(401).json({ message: "Not authenticated" });
+    const message =
+      process.env.NODE_ENV === "production"
+        ? "Authentication required. Please login to access this resource."
+        : "Authentication error";
+    return res.status(401).json({ message });
   }
 
-  const profileUsername = req.params.username;
-
-  if (req.user.username !== profileUsername) {
-    return res.status(403).json({
-      message: "Forbidden - You can only modify your own profile",
-    });
-  }
+  // Add user data to the request for use in the route handler
+  req.authenticatedUserId = req.user.id;
+  req.authenticatedUsername = req.user.username;
 
   next();
 }

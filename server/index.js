@@ -2,8 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const passport = require("passport");
-const authRoutes = require("./routes/auth");
-const userRoutes = require("./routes/user");
+const authRouter = require("./routes/auth");
+const userRouter = require("./routes/user");
+const createRouter = require("./routes/create");
 const cors = require("cors");
 
 const app = express();
@@ -22,11 +23,18 @@ app.use(
   })
 );
 
+// Add these options for better security
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      httpOnly: true, // Prevents client-side JS from reading the cookie
+      secure: process.env.NODE_ENV === "production", // Requires HTTPS in production
+      sameSite: "strict", // Prevents CSRF attacks
+      maxAge: 24 * 60 * 60 * 1000, // 24 hour session expiration
+    },
   })
 );
 
@@ -35,8 +43,9 @@ app.use(passport.session());
 
 require("./config/passport");
 
-app.use("/", authRoutes);
-app.use("/user", userRoutes);
+app.use("/", authRouter);
+app.use("/user", userRouter);
+app.use("/create", createRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

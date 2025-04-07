@@ -7,10 +7,6 @@ const userRoutes = [
     element: <User />,
     loader: loadUserProfileAction,
   },
-  {
-    path: "user/:username/create/set",
-    element: <SetCreator />,
-  },
 ];
 
 export default userRoutes;

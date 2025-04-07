@@ -12,14 +12,12 @@ const useAuthStore = create((set) => ({
 
       if (response.ok) {
         const userData = await response.json();
-        console.log("User data:", userData);
         set({ user: userData });
       } else {
         set({ user: null });
       }
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      console.log("User authentication check failed:");
       set({ user: null });
     }
   },
