@@ -1,4 +1,4 @@
-import { useParams, useLoaderData } from "react-router";
+import { useParams, useLoaderData, Link } from "react-router";
 import useAuthStore from "../stores/authStore";
 import { UserCircle, PlusCircle } from "lucide-react";
 import SetLibrary from "../components/SetLibrary";
@@ -29,14 +29,11 @@ function User() {
                   </div>
                 </div>
 
-                <button
-                  className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg shadow-md hover:shadow-blue-200/50 transition-all"
-                  onClick={() => {
-                    // To do
-                  }}
-                >
+                <button className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg shadow-md hover:shadow-blue-200/50 transition-all">
                   <PlusCircle size={18} />
-                  <span>Create New Flashcard Set</span>
+                  <Link to={`/user/${currUser.username}/create/set`}>
+                    Create New Flashcard Set
+                  </Link>
                 </button>
                 <SetLibrary />
               </>
@@ -72,12 +69,12 @@ function User() {
             User Not Found
           </h2>
           <p className="text-zinc-500 mb-6">This user does not exist.</p>
-          <a
-            href="/"
+          <Link
+            to="/"
             className="inline-flex items-center gap-2 py-2.5 px-4 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-all shadow-md hover:shadow-blue-200/50"
           >
             Return Home
-          </a>
+          </Link>
         </div>
       )}
     </div>
