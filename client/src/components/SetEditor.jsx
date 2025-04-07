@@ -1,25 +1,38 @@
-import { Form, useNavigate } from "react-router";
+import { Form, useNavigate, useParams, useLoaderData } from "react-router";
 import { BookType, BookText, Save, ArrowLeft } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function SetCreator() {
+function SetEditor() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const flashcardSet = useLoaderData();
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const navigate = useNavigate();
+
+  // Initialize form with existing data
+  useEffect(() => {
+    if (flashcardSet) {
+      setTitle(flashcardSet.title || "");
+      setDescription(flashcardSet.description || "");
+    }
+  }, [flashcardSet]);
 
   return (
     <div className="flex justify-center items-center min-h-[85vh] px-4 py-8">
       <div className="w-full max-w-2xl p-6 md:p-8 bg-white border-[0.075rem] border-gray-350 rounded-lg shadow-md">
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-zinc-900">
-            Create Flashcard Set
+            Edit Flashcard Set
           </h1>
           <p className="text-zinc-500 mt-1">
-            Add a title and cards for your new set
+            Update the title, description, and flashcards for your set
           </p>
         </div>
 
-        <Form action="/create/set" method="post" className="space-y-6">
+        <Form action={`/edit/set/${id}`} method="post" className="space-y-6">
+          <input type="hidden" name="id" value={id} />
+
           <div className="space-y-1">
             <label
               htmlFor="title"
@@ -80,7 +93,7 @@ function SetCreator() {
               className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-all shadow-md hover:shadow-blue-200/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white cursor-pointer"
             >
               <Save size={18} />
-              <span>Save Flashcard Set</span>
+              <span>Update Flashcard Set</span>
             </button>
           </div>
         </Form>
@@ -89,4 +102,4 @@ function SetCreator() {
   );
 }
 
-export default SetCreator;
+export default SetEditor;

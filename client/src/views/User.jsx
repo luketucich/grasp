@@ -20,12 +20,12 @@ function User() {
                     <UserCircle size={36} />
                   </div>
                   <div>
-                    <h1 className="text-2xl font-bold text-zinc-900 mb-1">
+                    <h1 className="text-3xl font-bold text-zinc-800 mb-1">
                       Your Profile
                     </h1>
-                    <p className="text-zinc-500">
-                      Hi, {currUser.username}! This is your profile.
-                    </p>
+                    <h2 className="text-zinc-500">
+                      Hi, {currUser.username}! Welcome to your profile.
+                    </h2>
                   </div>
                 </div>
                 <SetLibrary />
@@ -37,7 +37,7 @@ function User() {
                     <UserCircle size={36} />
                   </div>
                   <div>
-                    <h1 className="text-2xl font-bold text-zinc-900 mb-1">
+                    <h1 className="text-3xl font-bold text-zinc-800 mb-1">
                       User Profile
                     </h1>
                     <h2 className="text-zinc-500">

@@ -32,9 +32,22 @@ const createSet = async (title, description, authorId) => {
   });
 };
 
+const getSet = async (setId, authorId) => {
+  return await prisma.set.findUnique({
+    where: {
+      id: setId,
+      authorId,
+    },
+    include: {
+      Flashcard: true,
+    },
+  });
+};
+
 module.exports = {
   prisma,
   createUser,
   isUser,
   createSet,
+  getSet,
 };

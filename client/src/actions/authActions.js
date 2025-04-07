@@ -130,3 +130,25 @@ export async function createSetAction({ request }) {
     return { error: "Failed to create set. Please try again." };
   }
 }
+
+export async function loadUserSetAction({ params }) {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/user/${params.username}/set/${params.setId}/edit`,
+      {
+        method: "GET",
+        credentials: "include",
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to load set");
+    }
+    const data = await response.json();
+    console.log("Loaded set data:", data);
+    return data;
+  } catch (error) {
+    console.error("Error loading set:", error);
+    return { error: "Failed to load set. Please try again." };
+  }
+}
