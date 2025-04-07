@@ -4,6 +4,7 @@ import {
   ChevronDown,
   Plus,
   FolderOpen,
+  Folder,
   Settings,
   PanelLeft,
 } from "lucide-react";
@@ -88,7 +89,12 @@ function Sidebar() {
                 aria-expanded={isSetsExpanded}
               >
                 <div className="flex items-center gap-3 min-w-max">
-                  <FolderOpen size={18} className="flex-shrink-0" />
+                  {isSetsExpanded ? (
+                    <FolderOpen size={18} className="flex-shrink-0" />
+                  ) : (
+                    <Folder size={18} className="flex-shrink-0" />
+                  )}
+                  {/* Only show text when not collapsed */}
                   <span className="font-medium">Your Sets</span>
                 </div>
                 <ChevronDown
@@ -103,7 +109,7 @@ function Sidebar() {
                 to={`/user/${currUser.username}`}
                 className="flex items-center justify-center gap-2 px-3 py-2 text-zinc-700 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors cursor-pointer"
               >
-                <FolderOpen size={18} className="flex-shrink-0" />
+                <Folder size={18} className="flex-shrink-0" />
               </Link>
             )}
 
@@ -156,17 +162,17 @@ function Sidebar() {
             isCollapsed ? "flex justify-center" : ""
           }`}
         >
-          <Link
-            to="/settings"
-            className={`flex items-center ${
+          <button
+            onClick={() => alert("Settings feature is coming soon!")}
+            className={`flex items-center cursor-pointer ${
               isCollapsed ? "justify-center p-2" : "gap-3 px-3 py-2"
-            } text-zinc-600 hover:text-blue-500 hover:bg-blue-50 rounded-md transition-colors overflow-hidden cursor-pointer`}
+            } text-zinc-600 hover:text-blue-500 hover:bg-blue-50 rounded-md transition-colors overflow-hidden`}
           >
             <Settings size={18} className="flex-shrink-0" />
             {!isCollapsed && (
               <span className="min-w-max font-medium">Settings</span>
             )}
-          </Link>
+          </button>
         </div>
       </div>
     </aside>
